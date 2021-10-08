@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home"
+            android:icon="@drawable/ic_baseline_home_24"/>
+
+        <item
+            android:id="@+id/allCategories"
+            android:title="@string/all_categories"
+            android:icon="@drawable/ic_baseline_grid_on_24"/>
+
+        <item
+            android:id="@+id/offerZone"
+            android:title="@string/offer_zone"
+            android:icon="@drawable/ic_baseline_local_offer_24"/>
+
+        <item
+            android:id="@+id/sellOnFlipkart"
+            android:title="@string/sell_on_flipkart"
+            android:icon="@drawable/ic_baseline_reduce_capacity_24"/>
+
+        <item android:title="@string/profile">
+
+            <menu>
+                <item android:id="@+id/myOrder"
+                    android:title="@string/my_order"
+                    android:icon="@drawable/ic_baseline_add_business_24"/>
+
+                <item android:id="@+id/myRewards"
+                    android:title="@string/my_rewards"
+                    android:icon="@drawable/ic_baseline_grade_24"/>
+
+                <item
+                    android:id="@+id/myWishlist"
+                    android:title="@string/my_wishlist"
+                    android:icon="@drawable/ic_baseline_favorite_24"/>
+
+                <item
+                    android:id="@+id/myCart"
+                    android:title="@string/my_cart"
+                    android:icon="@drawable/ic_baseline_shopping_cart_24"/>
+
+                <item
+                    android:id="@+id/myAccount"
+                    android:title="@string/my_account"
+                    android:icon="@drawable/ic_baseline_person_outline_24"/>
+
+
+                <item android:id="@+id/logOut"
+                    android:title="@string/logout"
+                    android:icon="@drawable/ic_baseline_login_24"/>
+
+            </menu>
+
+        </item>
+    </group>
+</menu>
