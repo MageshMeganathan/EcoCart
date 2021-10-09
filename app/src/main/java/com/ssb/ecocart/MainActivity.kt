@@ -1,11 +1,8 @@
 package com.ssb.ecocart
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Log.d
 import android.view.Menu
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -14,7 +11,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -29,7 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://fakestoreapi.com/"
 class MainActivity : AppCompatActivity() {
-
     lateinit var ApiAdapter : ApiAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -96,9 +91,9 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<ProductDataItem>?>
             ) {
                 val responseBody = response.body()!!
-
-                ApiAdapter = ApiAdapter(baseContext,responseBody)
+                ApiAdapter = ApiAdapter(responseBody)
                 recyclerView.adapter = ApiAdapter
+
             }
 
             override fun onFailure(call: Call<List<ProductDataItem>?>, t: Throwable) {

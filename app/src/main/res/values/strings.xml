@@ -32,4 +32,8 @@
     <string name="price">Price</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="buy_now">Buy Now</string>
+    <string name="secondary_text">Secondary Text</string>
+    <string name="supporting_text">supporting_text</string>
+    <string name="action">Action</string>
+    <string name="action_2">Action 2</string>
 </resources>
