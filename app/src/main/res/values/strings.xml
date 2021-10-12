@@ -39,5 +39,9 @@
     <string name="product_image">Product_Image</string>
     <string name="text">Text</string>
     <string name="product_title">Product Title</string>
+    <string name="shop">Shop</string>
+    <string name="categories">Categories</string>
+    <string name="explore">Explore</string>
+    <string name="profile_bottom">Profile</string>
 
 </resources>

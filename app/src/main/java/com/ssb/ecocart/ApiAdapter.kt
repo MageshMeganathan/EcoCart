@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.product_list_layout.view.*
 
-
-
 class ApiAdapter(private val ProductTitle: List<ProductDataItem>) : RecyclerView.Adapter<ApiAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 

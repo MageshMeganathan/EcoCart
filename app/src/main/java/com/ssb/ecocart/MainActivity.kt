@@ -78,6 +78,8 @@ class MainActivity : AppCompatActivity() {
 
         getProductData()
 
+
+
     }
 
     private fun getProductData() {
@@ -106,9 +108,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.menu_bottom_navigation, menu)
         return true
-    }
 
+
+
+    }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
