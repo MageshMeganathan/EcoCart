@@ -37,5 +37,7 @@
     <string name="action">Action</string>
     <string name="action_2">Action 2</string>
     <string name="product_image">Product_Image</string>
+    <string name="text">Text</string>
+    <string name="product_title">Product Title</string>
 
 </resources>

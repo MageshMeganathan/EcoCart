@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.ssb.ecocart.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         //Slider Function
         val listItems: List<The_Slide_Items_Model_Class?>
         val page: ViewPager = findViewById(R.id.my_pager)
-        val tabLayout: TabLayout = findViewById(R.id.my_tablayout)
 
         // Make a copy of the slides you'll be presenting.
         // Make a copy of the slides you'll be presenting.
@@ -70,11 +70,12 @@ class MainActivity : AppCompatActivity() {
         )
         page.adapter = itemsPager_adapter
 
-        tabLayout.setupWithViewPager(page, true)
 
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = GridLayoutManager(this,2)
         recyclerView.layoutManager = linearLayoutManager
+
+
         getProductData()
 
     }
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                 d("MainActivity", "onFailure" +t.message)
             }
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -111,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }
 
 
