@@ -36,4 +36,6 @@
     <string name="supporting_text">supporting_text</string>
     <string name="action">Action</string>
     <string name="action_2">Action 2</string>
+    <string name="product_image">Product_Image</string>
+
 </resources>
