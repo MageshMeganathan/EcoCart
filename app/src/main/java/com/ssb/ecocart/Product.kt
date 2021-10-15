@@ -1,6 +1,10 @@
 package com.ssb.ecocart
 
-data class ProductDataItem(
+//import com.google.gson.annotations.Expose
+import android.media.Rating
+import com.google.gson.annotations.SerializedName
+
+data class Product(
     val category: String,
     val description: String,
     val id: Int,

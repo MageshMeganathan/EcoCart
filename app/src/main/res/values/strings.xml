@@ -43,5 +43,7 @@
     <string name="categories">Categories</string>
     <string name="explore">Explore</string>
     <string name="profile_bottom">Profile</string>
+    <string name="top_selling_products">Top Selling Products</string>
+    <string name="splashimage">splashImage</string>
 
 </resources>

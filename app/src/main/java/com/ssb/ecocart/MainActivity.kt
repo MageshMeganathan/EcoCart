@@ -1,39 +1,40 @@
 package com.ssb.ecocart
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
+import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
 import com.ssb.ecocart.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import io.paperdb.Paper
 
 
-const val BASE_URL = "https://fakestoreapi.com/"
 class MainActivity : AppCompatActivity() {
-    lateinit var ApiAdapter : ApiAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var apiService: APIService
+    private lateinit var productAdapter: ProductAdapter
+
+    private var products = listOf<Product>()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Paper.init(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -72,37 +73,61 @@ class MainActivity : AppCompatActivity() {
 
 
         recyclerView.setHasFixedSize(true)
-        linearLayoutManager = GridLayoutManager(this,2)
-        recyclerView.layoutManager = linearLayoutManager
+        apiService = APIConfig.getRetrofitClient(this).create(APIService::class.java)
 
 
-        getProductData()
+        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
+
+        swipeRefreshLayout.isRefreshing = true
+
+        swipeRefreshLayout.setOnRefreshListener {
+            getProducts()
+        }
+
+//        val layoutManager = StaggeredGridLayoutManager(this, Lin)
+
+        products_recyclerview.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
 
+        cart_size.text = ShoppingCart.getShoppingCartSize().toString()
+
+        getProducts()
+
+
+        showCart.setOnClickListener {
+
+            startActivity(Intent(this, ShoppingCartActivity::class.java))
+        }
 
     }
 
-    private fun getProductData() {
-        val retrofitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ApiInterface::class.java)
-        val retrofitData = retrofitBuilder.getData()
+    private fun getProducts() {
 
-        retrofitData.enqueue(object : Callback<List<ProductDataItem>?> {
-            override fun onResponse(
-                call: Call<List<ProductDataItem>?>,
-                response: Response<List<ProductDataItem>?>
-            ) {
-                val responseBody = response.body()!!
-                ApiAdapter = ApiAdapter(responseBody)
-                recyclerView.adapter = ApiAdapter
+        apiService.getProducts().enqueue(object : retrofit2.Callback<List<Product>> {
+            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+
+                print(t.message)
+                t.message?.let { Log.d("Data error", it) }
+                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
 
             }
 
-            override fun onFailure(call: Call<List<ProductDataItem>?>, t: Throwable) {
-                d("MainActivity", "onFailure" +t.message)
+            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
+
+                swipeRefreshLayout.isRefreshing = false
+//                swipeRefreshLayout.isEnabled = false
+
+                products = response.body()!!
+
+                productAdapter = ProductAdapter(this@MainActivity, products)
+
+                products_recyclerview.adapter = productAdapter
+
+//                productAdapter.notifyDataSetChanged()
+
             }
+
         })
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -110,9 +135,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
         menuInflater.inflate(R.menu.menu_bottom_navigation, menu)
         return true
-
-
-
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -120,6 +142,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-
-
