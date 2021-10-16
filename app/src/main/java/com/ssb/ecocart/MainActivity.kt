@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,6 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.android.material.navigation.NavigationView
 import com.ssb.ecocart.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
@@ -72,7 +74,13 @@ class MainActivity : AppCompatActivity() {
         page.adapter = itemsPager_adapter
 
 
-        recyclerView.setHasFixedSize(true)
+        basketButton.setOnClickListener {
+
+            val intent = Intent(this,ShoppingCartActivity::class.java)
+            startActivity(intent)
+        }
+
+        products_recyclerview.setHasFixedSize(true)
         apiService = APIConfig.getRetrofitClient(this).create(APIService::class.java)
 
 
@@ -91,13 +99,9 @@ class MainActivity : AppCompatActivity() {
 
         cart_size.text = ShoppingCart.getShoppingCartSize().toString()
 
+
         getProducts()
 
-
-        showCart.setOnClickListener {
-
-            startActivity(Intent(this, ShoppingCartActivity::class.java))
-        }
 
     }
 
