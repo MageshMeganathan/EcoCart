@@ -1,10 +1,9 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -16,9 +15,15 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.android.material.navigation.NavigationView
+import com.ssb.ecocart.*
+import com.ssb.ecocart.adapter.ProductAdapter
+import com.ssb.ecocart.adapter.SliderAdapter
+import com.ssb.ecocart.api.APIConfig
+import com.ssb.ecocart.api.APIService
+import com.ssb.ecocart.api.modal.SliderModalClass
 import com.ssb.ecocart.databinding.ActivityMainBinding
+import com.ssb.ecocart.util.Product
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
@@ -57,26 +62,26 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //Slider Function
-        val listItems: List<The_Slide_Items_Model_Class?>
+        val listItems: List<SliderModalClass?>
         val page: ViewPager = findViewById(R.id.my_pager)
 
         // Make a copy of the slides you'll be presenting.
         // Make a copy of the slides you'll be presenting.
         listItems = ArrayList()
-        listItems.add(The_Slide_Items_Model_Class(R.drawable.image2, ""))
-        listItems.add(The_Slide_Items_Model_Class(R.drawable.image1, ""))
-        listItems.add(The_Slide_Items_Model_Class(R.drawable.image3, ""))
-        listItems.add(The_Slide_Items_Model_Class(R.drawable.image4, ""))
-        val itemsPager_adapter = The_Slide_items_Pager_Adapter(
+        listItems.add(SliderModalClass(R.drawable.image2, ""))
+        listItems.add(SliderModalClass(R.drawable.image1, ""))
+        listItems.add(SliderModalClass(R.drawable.image3, ""))
+        listItems.add(SliderModalClass(R.drawable.image4, ""))
+        val itemsPager_adapter = SliderAdapter(
             this,
-            listItems as List<The_Slide_Items_Model_Class>
+            listItems as List<SliderModalClass>
         )
         page.adapter = itemsPager_adapter
 
 
         basketButton.setOnClickListener {
 
-            val intent = Intent(this,ShoppingCartActivity::class.java)
+            val intent = Intent(this, ShoppingCartActivity::class.java)
             startActivity(intent)
         }
 

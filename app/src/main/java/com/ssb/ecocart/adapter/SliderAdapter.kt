@@ -1,4 +1,4 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.adapter
 
 import android.content.Context
 import android.view.View
@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.view.LayoutInflater
 import android.widget.ImageView
-import java.util.*
+import com.ssb.ecocart.R
+import com.ssb.ecocart.api.modal.SliderModalClass
 
 
-class The_Slide_items_Pager_Adapter(
+class SliderAdapter(
     private val Mcontext: Context,
-    private val theSlideItemsModelClassList: List<The_Slide_Items_Model_Class>
+    private val sliderModalClassList: List<SliderModalClass>
 ) :
     PagerAdapter() {
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -20,8 +21,8 @@ class The_Slide_items_Pager_Adapter(
         val sliderLayout: View = inflater.inflate(R.layout.items_layout, null)
         val featured_image: ImageView = sliderLayout.findViewById(R.id.my_featured_image)
         val caption_title = sliderLayout.findViewById<TextView>(R.id.my_caption_title)
-        featured_image.setImageResource(theSlideItemsModelClassList[position].featured_image)
-        caption_title.text = theSlideItemsModelClassList[position].the_caption_Title
+        featured_image.setImageResource(sliderModalClassList[position].featured_image)
+        caption_title.text = sliderModalClassList[position].the_caption_Title
         container.addView(sliderLayout)
         return sliderLayout
     }
@@ -31,7 +32,7 @@ class The_Slide_items_Pager_Adapter(
     }
 
     override fun getCount(): Int {
-        return theSlideItemsModelClassList.size
+        return sliderModalClassList.size
     }
 
     override fun isViewFromObject(view: View, o: Any): Boolean {

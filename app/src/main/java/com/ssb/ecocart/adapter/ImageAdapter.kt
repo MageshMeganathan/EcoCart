@@ -1,4 +1,4 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.adapter
 
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import com.ssb.ecocart.R
 
 
 class ImageAdapter internal constructor(context: Context) : PagerAdapter() {
@@ -23,7 +24,7 @@ class ImageAdapter internal constructor(context: Context) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageView = ImageView(mContext)
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageView.setImageResource(sliderImageId[position])
         (container as ViewPager).addView(imageView, 0)
         return imageView

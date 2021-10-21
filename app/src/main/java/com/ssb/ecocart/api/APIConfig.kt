@@ -1,4 +1,4 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.api
 
 import android.content.Context
 import com.google.gson.Gson
@@ -20,9 +20,6 @@ object APIConfig {
         .create()
 
     fun getRetrofitClient(context: Context): Retrofit {
-
-        //    File httpCacheDirectory = new File(context.getCacheDir(), "httpCache");
-        //    Cache cache = new Cache(httpCacheDirectory, 70 * 1024 * 1024);
 
         val okHttpClient = OkHttpClient.Builder()
             .build()

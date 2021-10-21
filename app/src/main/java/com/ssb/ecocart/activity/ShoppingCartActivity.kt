@@ -1,18 +1,17 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.activity
 
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssb.ecocart.R
+import com.ssb.ecocart.adapter.ShoppingCartAdapter
 import kotlinx.android.synthetic.main.activity_shopping_cart.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 class ShoppingCartActivity : AppCompatActivity() {
 
-    lateinit var adapter: ShoppingCartAdapter
-
+    private lateinit var adapter: ShoppingCartAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +21,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val upArrow = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material)
-        upArrow?.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
-
 
         adapter = ShoppingCartAdapter(this, ShoppingCart.getCart())
         adapter.notifyDataSetChanged()
@@ -33,21 +30,17 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         shopping_cart_recyclerView.layoutManager = LinearLayoutManager(this)
 
-
         val totalPrice = ShoppingCart.getCart()
             .fold(0.toDouble()) { acc, cartItem -> acc + cartItem.quantity.times(cartItem.product.price!!.toDouble()) }
 
-
         total_price.text = "$${totalPrice}"
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
-
             }
         }
 

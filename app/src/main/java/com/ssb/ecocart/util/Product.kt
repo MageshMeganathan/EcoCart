@@ -1,4 +1,4 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.util
 
 //import com.google.gson.annotations.Expose
 import android.media.Rating

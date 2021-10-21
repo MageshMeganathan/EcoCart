@@ -1,4 +1,4 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.ssb.ecocart.util.CartItem
+import com.ssb.ecocart.util.Product
+import com.ssb.ecocart.R
+import com.ssb.ecocart.activity.MainActivity
+import com.ssb.ecocart.activity.ShoppingCart
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.product_list_layout.view.*
@@ -44,15 +49,6 @@ class ProductAdapter(var context: Context, var products: List<Product> = arrayLi
 
             itemView.product_name.text = product.title
             itemView.product_price.text = "$${product.price.toString()}"
-
-
-
-
-            //                val products = mutableListOf<Product>()
-//                products.add(product)
-//
-
-//                ShoppingCart.addItem(item)
 
 
             Observable.create(ObservableOnSubscribe<MutableList<CartItem>> {

@@ -1,7 +1,8 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.activity
 
 import android.content.Context
 import android.widget.Toast
+import com.ssb.ecocart.util.CartItem
 import io.paperdb.Paper
 
 class ShoppingCart {
@@ -58,7 +59,7 @@ class ShoppingCart {
         fun getShoppingCartSize(): Int {
 
             var cartSize = 0
-            ShoppingCart.getCart().forEach {
+            getCart().forEach {
                 cartSize += it.quantity;
             }
 

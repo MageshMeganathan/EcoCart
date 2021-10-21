@@ -1,4 +1,4 @@
-package com.ssb.ecocart.ui.home
+package com.ssb.ecocart.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,10 +1,12 @@
-package com.ssb.ecocart
+package com.ssb.ecocart.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ssb.ecocart.util.CartItem
+import com.ssb.ecocart.R
 import kotlinx.android.synthetic.main.cart_list_item.view.*
 
 class ShoppingCartAdapter(var context: Context, var cartItems: List<CartItem>) :
